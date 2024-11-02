@@ -58,4 +58,25 @@ public class ReqResAPISteps {
         response = request.post(path);
     }
 
+    @Then("the response should indicate that the user was successfully created with a status of {int} and should return the ID of the created user")
+    public void the_response_should_indicate_that_the_user_was_successfully_created_with_a_status_and_should_return_the_ID_of_the_created_user(int status) {
+        // Verify status code is 201
+        response.then().statusCode(status);
+        // Check that "id" is present and not null
+        Integer userId = response.jsonPath().getInt("id");
+        Assert.assertNotNull("The 'id' field is missing from the response.", userId);
+        //print id
+        System.out.println("id new user:" + userId);
+
+        // Check that "createdAt" is present and matches a date-time format
+        String createdAt = response.jsonPath().getString("createdAt");
+        // print structure createdAt
+        System.out.println("Structure createdAt: " + createdAt);
+        Assert.assertNotNull("The 'createdAt' field is missing from the response.", createdAt);
+
+        // Verify "name" and "job" in the response match the input data
+        response.then().body("name", equalTo("Luis"));
+        response.then().body("job", equalTo("Tester"));
+    }
+
 }
