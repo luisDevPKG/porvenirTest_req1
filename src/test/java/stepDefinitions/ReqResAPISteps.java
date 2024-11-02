@@ -79,4 +79,22 @@ public class ReqResAPISteps {
         response.then().body("job", equalTo("Tester"));
     }
 
+    /* Third scenario */
+    @Given("that I have an existing user ID")
+    public void that_I_have_an_existing_user_ID() {
+        RestAssured.baseURI = URL;
+        String requestBody = "{ \"name\":\"Luis\",\"job\":\"Tester Automation\" }";
+        request = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body(requestBody);
+        // print JSON
+        System.out.println("Request JSON Body: " + requestBody);
+    }
+    @When("I make a PUT request to the {string} {id} endpoint with updated data")
+    public void I_make_a_PUT_request_to_the_endpoint_with_updated_data(String endpoint, int id) {
+        // Build the route using the endpoint and user ID String path = endpoint
+        String path = "/api/users/" + id;
+        response = request.post(path);
+    }
+
 }

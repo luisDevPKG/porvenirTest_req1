@@ -9,3 +9,8 @@ Feature: ReqRes API automatedTesting
     Given that I have the data to create a new user
     When I make a POST request to the "/api/users" endpoint with the user data
     Then the response should indicate that the user was successfully created with a status of 201 and should return the ID of the created user
+
+  Scenario: Updating an existing user
+    Given that I have an existing user ID
+    #When I make a PUT request to the "/api/users/"{id} endpoint with updated data
+    #Then the response should indicate that the user was successfully updated with a status of 200, and should return the updated data
