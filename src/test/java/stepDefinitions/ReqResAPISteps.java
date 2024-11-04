@@ -90,11 +90,18 @@ public class ReqResAPISteps {
         // print JSON
         System.out.println("Request JSON Body: " + requestBody);
     }
-    @When("I make a PUT request to the {string} {id} endpoint with updated data")
-    public void I_make_a_PUT_request_to_the_endpoint_with_updated_data(String endpoint, int id) {
-        // Build the route using the endpoint and user ID String path = endpoint
-        String path = "/api/users/" + id;
-        response = request.post(path);
+
+    @When("^I make a PUT request to the /api/users/(\\d+) endpoint with updated data$")
+    public void I_make_a_PUT_request_to_the_endpoint_with_updated_data(int id) {
+        String endpoint = "api/users/";
+        response = request.put(endpoint + id);
     }
 
+    @Then("the response should indicate that the user was successfully updated with a status of {int}, and should return the updated data")
+    public void the_response_should_indicate_that_the_user_was_successfully_updated_with_a_status_and_should_return_the_updated_data(int status){
+        response.then().statusCode(status);
+        // Verify "name" and "job" in the response match the updated data
+        response.then().body("name", equalTo("Luis"));
+        response.then().body("job", equalTo("Tester Automation"));
+    }
 }
