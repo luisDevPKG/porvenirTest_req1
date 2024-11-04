@@ -12,5 +12,10 @@ Feature: ReqRes API automatedTesting
 
   Scenario: Updating an existing user
     Given that I have an existing user ID
-    When I make a PUT request to the /api/users/2 endpoint with updated data
+    When I make a PUT request to the "/api/users/{id}" endpoint with updated data
     Then the response should indicate that the user was successfully updated with a status of 200, and should return the updated data
+
+  Scenario: Deleting an existing user
+    Given that I have an existing user ID
+    When I make a DELETE request to the endpoint "/api/users/{id}"
+    Then the response should return a status of 204, indicating that the user was successfully deleted
