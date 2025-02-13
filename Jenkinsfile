@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Agarrar el repositorio en el que esta el codigo que se va a correr
-                git 'https://github.com/luisDevPKG/porvenirTest_req1.git'
+                git branch: 'main', url: 'https://github.com/luisDevPKG/porvenirTest_req1.git'
 
                 // Run Maven clean.
                 sh "mvn clean install"
