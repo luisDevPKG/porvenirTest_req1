@@ -15,7 +15,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/luisDevPKG/porvenirTest_req1.git'
 
                 // Run Maven clean.
-                sh "mvn clean install"
+                bat "mvn clean install"
 
                 // To run Maven on a Windows agent, use
                 // bat "mvn -Dmaven.test.failure.ignore=true clean package"
